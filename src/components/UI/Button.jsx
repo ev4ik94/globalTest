@@ -23,8 +23,8 @@ const ButtonStyle = styled.button`
     }
 `
 
-function Button({text, disabled=false, type='button'}){
-    return(<ButtonStyle type={type} disabled={disabled}>{text}</ButtonStyle>)
+function Button({text, disabled=false, type='button', ...styles}){
+    return(<ButtonStyle type={type} disabled={disabled} {...styles}>{text}</ButtonStyle>)
 }
 
 

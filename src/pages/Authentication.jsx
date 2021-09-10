@@ -1,7 +1,5 @@
 
 
-
-
 /*----Components----*/
 import AuthForm from "../components/Auth-form";
 

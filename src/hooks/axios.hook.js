@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 /*----Functions----*/
-import {getCookie, setCookie, decryptString} from "../components/utils-func";
+import {decryptString} from "../components/utils-func";
 
 var CryptoJS = require("crypto-js");
 
@@ -15,7 +15,7 @@ export function AxiosApi(){
 
     /*-----Abort Controller -----*/
 
-    const source = axios.CancelToken.source()
+
 
     const resetErr = ()=>{
         setError(null)
@@ -24,10 +24,10 @@ export function AxiosApi(){
 
 
     const request = useCallback(async(url, method='GET', data=null, headers={})=>{
+
         setLoading(true)
         const instance = axios.create({
-            withCredentials: true,
-            cancelToken: source.token
+            withCredentials: true
         })
 
 
@@ -47,7 +47,7 @@ export function AxiosApi(){
             error=>{
 
                 setLoading(false)
-                const {response, config} = error
+                const {response} = error
 
                 if(response && response.status){
                     switch(response.status){
@@ -55,15 +55,16 @@ export function AxiosApi(){
                             setError(response.data)
                             break;
                         case 401:
-                            if(getCookie('user')){
-                                let getData = decryptString(getCookie('user'));
+                            console.log('401')
+                            if(localStorage.getItem('user')){
+                                let getData = decryptString(localStorage.getItem('user'));
                                 const {refreshToken} = getData
                                 instance({
                                     method: 'POST',
                                     url: `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_USER_TOKENS}`,
                                     data: {refreshToken}
                                 }).then((result)=> {
-                                    setCookie('user', CryptoJS.AES.encrypt(JSON.stringify(result.data), 'secret_key_test-uJ8CKmiX').toString())
+
                                 }).catch(e=>console.log(e))
                             }
                             break;
@@ -80,7 +81,7 @@ export function AxiosApi(){
                             break;
                     }
                 }else{
-                    if(error && error!==null){
+                    if(error){
                         console.log('error server')
                     }
                 }

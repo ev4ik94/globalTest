@@ -30,8 +30,24 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
+  background-color: #F7F8F9!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 
+a{
+  text-decoration: none!important;
+}
+
+li{
+  list-style: none;
+}
+
+.img-contain{
+  object-fit: contain;
+}
+
+.img-cover{
+  object-fit: cover;
+}

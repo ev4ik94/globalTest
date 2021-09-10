@@ -1,0 +1,31 @@
+{
+  "Buttons.auth-type-1": "Войти",
+  "Buttons.account-type-1": "Выйти",
+  "Buttons.account-type-2": "Загрузить",
+  "Buttons.account-type-3": "Удалить",
+  "Buttons.password-type-1": "Изменить пароль",
+  "Buttons.password-type-2": "Отменить",
+
+
+  "Inputs.auth-title": "Вход",
+  "Inputs.password-label1": "Текущий пароль",
+  "Inputs.password-label2": "Новый пароль",
+  "Inputs.password-label3": "Повторите новый пароль",
+
+  "Header.links1": "Транзакции",
+  "SideNav.links1": "Аккаунт",
+  "SideNav.links2": "Пароль",
+
+
+  "Table.title1": "Код",
+  "Table.title2": "Дата и время",
+  "Table.title3": "Тип",
+  "Table.title4": "Статус",
+
+  "Account.text1": "Активный",
+  "Account.text2": "Заблокирован",
+  "Account.text3": "Название",
+  "Account.text4": "Имя",
+  "Account.text5": "Почта",
+  "Account.text6": "Номер тел."
+}

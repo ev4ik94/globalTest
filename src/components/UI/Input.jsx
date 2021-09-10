@@ -53,7 +53,7 @@ const InputButton = styled.button`
   position: absolute;
   background: transparent;
   border: none;
-  top: 25%;
+  top: 20%;
   right: 13px;
 `
 
@@ -61,7 +61,7 @@ const InputButton = styled.button`
 function Input({
                    register,
                    name,
-                   required=false,
+                   validation={},
                    label=null,
                    type='text',
                    error={},
@@ -72,12 +72,12 @@ function Input({
     return(
         <InputGroup>
             {label?(<Label error={error[name]}>{label}</Label>):''}
-            <InputStyle {...register(name, {required})} error={error[name]} type={type} {...rest}/>
+            <InputStyle {...register(name, validation)} error={error[name]} type={type} {...rest}/>
             {button?(<InputButton onClick={(e)=>{
                 e.preventDefault()
                 buttonFunc()
             }}>{button}</InputButton>): ''}
-            {error[name] && <ErrorsMessage>{error[name].message.length?error[name].message:'Эта строка необходима для заполнения'}</ErrorsMessage>}
+            {error[name] && <ErrorsMessage>{error[name].message&&error[name].message.length?error[name].message:''}</ErrorsMessage>}
         </InputGroup>
     )
 }
@@ -87,7 +87,7 @@ Input.prototype = {
     label: PropTypes.string,
     register: PropTypes.func,
     name: PropTypes.string,
-    required: PropTypes.bool,
+    validation: PropTypes.object,
     error: PropTypes.object,
     button: PropTypes.any,
     buttonFunc: PropTypes.func
