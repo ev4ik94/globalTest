@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import {useEffect, useState} from "react";
-import styled from 'styled-components'
+import styled from 'styled-components';
 import {useHistory} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 
 /*-----Constants style----*/
-import {color_red} from "../constants";
+import {color_red, color_grey2} from "../constants";
 
 /*-----UI components----*/
 import Button from "../components/UI/Button";
@@ -15,11 +15,6 @@ import Input from "./UI/Input";
 
 /*-----Icons-----*/
 import {Eye} from "./icons/Icons-pack";
-
-
-/*-----Style----*/
-import {Title} from "../styles/style-components/Title";
-
 
 
 /*-----Hooks----*/
@@ -35,7 +30,9 @@ const SpanError = styled.span`
 `
 
 
-function AuthForm(){
+
+
+function AuthForm({setTimeoutLogout}){
     const { register, handleSubmit, watch, formState: { errors, touchedFields }, setError, clearErrors } = useForm();
     const [typeInput, setTypeInput] = useState(false)
     let disabled = true
@@ -61,6 +58,7 @@ function AuthForm(){
                 'POST', data)
                 .then(result=>{
                     login(result.data)
+                    setTimeoutLogout(false)
                     history.push('/')
                 })
                 .catch(e=>{})
@@ -87,8 +85,8 @@ function AuthForm(){
 
 
     return(
-       <div className='col-3 mx-auto mt-5'>
-            <Title className='text-center'>{t('Inputs.auth-title')}</Title>
+       <div className='col-lg-3 col-md-6 mx-auto'>
+
            <form onSubmit={handleSubmit(onSubmit)}>
                {error?(<SpanError>{error.message}</SpanError>):''}
                <Input  register={register}

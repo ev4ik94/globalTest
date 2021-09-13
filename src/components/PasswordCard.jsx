@@ -19,6 +19,22 @@ const PasswordWrap = styled.div`
   padding: 40px;
   border-radius: 8px;
   margin: 0 25px;
+  @media screen and (max-width: 992px){
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  @media screen and (max-width: 769px){
+    & form{
+      padding: 0;
+    }
+    & .button_group{
+      flex-direction: column;
+      & > button{
+        margin-bottom: 10px;
+      }
+    }
+  }
   
 `
 
@@ -42,7 +58,7 @@ export default function PasswordCard(){
 
 
     return(
-        <PasswordWrap className='col-6'>
+        <PasswordWrap className='col-lg-6 col-md-10 col-12'>
             <form onSubmit={handleSubmit(onSubmit)} style={{paddingLeft: '30px', paddingRight: '30px'}}>
                 <div style={{marginBottom: '35px'}}>
                     <Input  register={register}
@@ -84,7 +100,7 @@ export default function PasswordCard(){
                     />
                 </div>
 
-                <div className='d-flex'>
+                <div className='d-flex button_group'>
                     <Button text={t('Buttons.password-type-1')}
                             type='submit'
                             style={{fontSize:'14px', marginRight: '16px', fontWeight: '600'}}/>

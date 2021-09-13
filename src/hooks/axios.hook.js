@@ -55,16 +55,18 @@ export function AxiosApi(){
                             setError(response.data)
                             break;
                         case 401:
-                            console.log('401')
+
                             if(localStorage.getItem('user')){
                                 let getData = decryptString(localStorage.getItem('user'));
-                                const {refreshToken} = getData
+                                const {refreshToken, jwtToken} = getData
                                 instance({
                                     method: 'POST',
                                     url: `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_USER_TOKENS}`,
-                                    data: {refreshToken}
+                                    data: JSON.stringify({"refresh_token":refreshToken}),
+                                    headers: {'Authorization': `Bearer ${jwtToken}`}
                                 }).then((result)=> {
-
+                                    var cipherData = CryptoJS.AES.encrypt(JSON.stringify(result.data), 'secret_key_test-uJ8CKmiX').toString();
+                                    localStorage.setItem('user', cipherData)
                                 }).catch(e=>console.log(e))
                             }
                             break;

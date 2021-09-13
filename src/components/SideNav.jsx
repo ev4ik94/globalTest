@@ -31,7 +31,7 @@ export default function SideNav(){
     let location = useLocation()
     const {t} = useTranslation()
     return(
-        <div>
+        <div className='d-lg-block d-none'>
             <TitleNav>Настройки</TitleNav>
             <ul className='mb-0 px-0' style={{marginTop: '50px'}}>
                 <li>

@@ -8,6 +8,12 @@ import {color_grey2, status_decline, color_black} from "../constants";
 /*----Icons----*/
 import {Arrow, Block, ThreeDots} from "./icons/Icons-pack";
 
+const WrapTable = styled.div`
+  display: block;
+  overflow-x: scroll;
+  white-space: nowrap;
+`
+
 const TableStyle = styled.table`
   border-collapse: separate;
   border-spacing: 0px 8px;
@@ -52,14 +58,21 @@ const TableStyle = styled.table`
       }
     }
   }
+  
+  @media screen and (max-width: 992px){
+    & td{
+      font-size: 14px!important;
+    }
+  }
 `
 
 
 export default function Table({transactions}){
     const {t} = useTranslation()
     return(
-        <TableStyle className='col-12' cellspacing="5" cellpadding="10" border="1">
-            <tbody>
+        <WrapTable>
+            <TableStyle className='col-12' cellspacing="5" cellpadding="10" border="1">
+                <tbody>
                 <tr>
                     <th><button>{t('Table.title1')} <Arrow /></button></th>
                     <th><button>{t('Table.title2')} <Arrow /></button></th>
@@ -82,8 +95,9 @@ export default function Table({transactions}){
                         )
                     })
                 }
-            </tbody>
-        </TableStyle>
+                </tbody>
+            </TableStyle>
+        </WrapTable>
 
     )
 }

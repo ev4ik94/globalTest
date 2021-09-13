@@ -23,8 +23,11 @@ export function useAuth(){
 
     const logout = async()=>{
         if(getUserData()){
-            const {jwtToken} = getUserData()
-            request(`${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_USER_LOGOUT}`, 'DELETE', null, {
+            const {jwtToken, refreshToken} = getUserData()
+
+            request(`${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_USER_LOGOUT}`, 'DELETE', {
+                "refresh_token":refreshToken
+            }, {
                 'Authorization': `Bearer ${jwtToken}`
             }).then(()=>{
                 localStorage.removeItem('user')

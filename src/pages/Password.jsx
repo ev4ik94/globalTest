@@ -10,7 +10,7 @@ export default function Password(){
                 <SideNav />
             </div>
 
-            <div className='col-lg-10'>
+            <div className='col-lg-10 col-12'>
                 <PasswordCard />
             </div>
         </div>

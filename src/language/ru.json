@@ -8,6 +8,7 @@
 
 
   "Inputs.auth-title": "Вход",
+  "Input.message-err": "Вы деавторизованы из за бездействия в системе более чем 10 минут.",
   "Inputs.password-label1": "Текущий пароль",
   "Inputs.password-label2": "Новый пароль",
   "Inputs.password-label3": "Повторите новый пароль",
