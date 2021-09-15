@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {useRef} from "react";
 import {Link} from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 import {useLocation} from 'react-router-dom';
@@ -83,14 +84,40 @@ const ButtonSettings = styled.button`
       fill: ${color_purple}!important;
     }
   }
+  
+  
+  
+`
+
+const DropDown = styled.div`
+  & .dropdown-content {
+    background: #fff;
+    right: 0;
+    min-width: 200px;
+    top: 100%;
+
+    & a {
+      text-align: left;
+      display: block;
+      color: ${color_grey2};
+      font-weight: 700;
+      transition: .4s;
+      padding: 10px 15px;
+      &.active{color: ${color_black};}
+      &:hover{
+        color: ${color_black};
+      }
+    }
+  }
 `
 
 export default function Header(){
     const {t} = useTranslation()
     const location = useLocation()
+    const dropdown = useRef(null)
     return(
     <NavBar>
-        <Container className='d-flex align-items-center justify-content-between'>
+        <Container className='d-flex align-items-center justify-content-between position-relative'>
             <div className='d-flex align-items-center'>
                 <Link to={'/'}>
                     <Brand>
@@ -112,9 +139,21 @@ export default function Header(){
                     <img src="/pictures/avatar.jpg" alt="Avatar" className='w-100 h-100 img-cover'/>
                 </AvatarContainer>
 
-                <ButtonSettings className='d-lg-none d-block'>
-                    <Settings />
-                </ButtonSettings>
+                <DropDown className='d-lg-none d-block'>
+                    <ButtonSettings onClick={()=>{dropdown.current.classList.toggle('d-none')}}>
+                        <Settings />
+                    </ButtonSettings>
+                    <div className='dropdown-content position-absolute d-none' ref={dropdown}>
+                        <Link to={'/'}
+                              className={`mb-0 ${location.pathname==='/'?'active':''}`}
+                              onClick={()=>dropdown.current.classList.toggle('d-none')}
+                        >{t('SideNav.links1')}</Link>
+                        <Link to={'/password'}
+                              className={`mb-0 ${location.pathname==='/password'?'active':''}`}
+                              onClick={()=>dropdown.current.classList.toggle('d-none')}
+                        >{t('SideNav.links2')}</Link>
+                    </div>
+                </DropDown>
             </div>
 
             <NavbarBottom className='d-lg-none d-flex justify-content-around'>

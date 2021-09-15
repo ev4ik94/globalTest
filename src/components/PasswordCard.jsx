@@ -19,8 +19,11 @@ const PasswordWrap = styled.div`
   padding: 40px;
   border-radius: 8px;
   margin: 0 25px;
+  & form{
+    padding: 0px 30px;
+  }
   @media screen and (max-width: 992px){
-    margin: 0 auto;
+    margin: 0 auto 40px;
     padding: 20px;
   }
 
@@ -59,7 +62,7 @@ export default function PasswordCard(){
 
     return(
         <PasswordWrap className='col-lg-6 col-md-10 col-12'>
-            <form onSubmit={handleSubmit(onSubmit)} style={{paddingLeft: '30px', paddingRight: '30px'}}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div style={{marginBottom: '35px'}}>
                     <Input  register={register}
                             name='old_password'
